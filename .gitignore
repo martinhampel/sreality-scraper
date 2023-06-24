@@ -1,0 +1,40 @@
+# Ignore node modules
+node_modules/
+
+# Ignore build output directory
+/dist
+/build
+
+# Ignore log files
+*.log
+
+# Ignore environment variables file
+.env
+
+# Ignore Docker related
+node_modules/
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Ignore IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore TypeScript type declaration files
+*.d.ts
+
+# Ignore npm debug logs
+npm-debug.log*
+
+# Ignore yarn logs
+.yarn-integrity
+yarn-debug.log*
+yarn-error.log*

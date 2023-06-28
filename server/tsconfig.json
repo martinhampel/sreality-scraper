@@ -3,7 +3,7 @@
         "target": "ES6",
         "module": "CommonJS",
         "outDir": "./dist",
-        "rootDir": "./src",
+        "rootDir": "c:/Users/hampelm/Documents/škola/sreality-scraper/server",
         "strict": true,
         "moduleResolution": "node",
         "esModuleInterop": true,

@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: "./frontend"
+      dockerfile: Dockerfile
+    ports:
+      - "8080:3000"
+
+  backend:
+    build:
+      context: "./server"
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3003"
+    environment:
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+    depends_on:
+      - db
+
+  db:
+    build:
+      context: "./database"
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - POSTGRES_DB=propertydb 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

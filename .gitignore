@@ -11,12 +11,6 @@ node_modules/
 # Ignore environment variables file
 .env
 
-# Ignore Docker related
-node_modules/
-Dockerfile*
-docker-compose*.yml
-.dockerignore
-
 # Ignore IDE and editor files
 .vscode/
 .idea/

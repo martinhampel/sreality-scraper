@@ -8,7 +8,7 @@ interface ScrapedItem {
 }
 
 const client = new Client({
-    host: 'localhost',
+    host: 'db',
     user: DB_USERNAME,
     password: DB_PASSWORD,
     database: 'propertydb',
@@ -39,14 +39,17 @@ async function saveToDatabase(scrapedItems: ScrapedItem[]) {
     await client.connect();
 
     for (const item of scrapedItems) {
-        await client.query(`INSERT INTO properties ("propertyId", title, "imageUrl") VALUES(DEFAULT, $1, $2)`, [item.title, item.imageUrl]);
+        await client.query(`INSERT INTO public."properties" ("propertyId", title, "imageUrl") VALUES(DEFAULT, $1, $2)`, [item.title, item.imageUrl]);
     }
 
     await client.end();
 }
 
 (async () => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox'] // Add this line
+    });
     const page = await browser.newPage();
 
     const scrapedItems: ScrapedItem[] = [];

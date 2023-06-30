@@ -37,7 +37,7 @@ const Home: React.FC = () => {
         <Header />
 
         <Container sx={{ minWidth: '400px', mt: 5, textAlign: 'center' }} maxWidth='lg'>
-          <Grid container spacing={2}>
+          <Grid sx={{ justifyContent: 'center' }} container spacing={2}>
             {displayData && displayData.length > 0 ? (
               displayData.map((item, index) => (
                 <Grid item xs={12} sm={6} md={4} key={`reality-card-${item.title}-${index}`}>
@@ -45,7 +45,12 @@ const Home: React.FC = () => {
                 </Grid>
               ))
             ) : (
-              <CircularProgress sx={{ justifyContent: 'center' }} />
+              <>
+                <CircularProgress />
+                <Typography style={{ minWidth: '-webkit-fill-available' }} variant='body1'>
+                  Waiting for data from scraper.
+                </Typography>
+              </>
             )}
           </Grid>
 

@@ -37,12 +37,25 @@ async function scrapePage(page: Page, pageIterator: number): Promise<ScrapedItem
 
 async function saveToDatabase(scrapedItems: ScrapedItem[]) {
     await client.connect();
+    console.log('client connected');
 
-    for (const item of scrapedItems) {
-        await client.query(`INSERT INTO public."properties" ("propertyId", title, "imageUrl") VALUES(DEFAULT, $1, $2)`, [item.title, item.imageUrl]);
+    let retries: number = 5;
+    while (retries) {
+        try {
+            for (const item of scrapedItems) {
+                await client.query('INSERT INTO public.properties(propertyId, title, imageUrl) VALUES(DEFAULT, $1, $2)', [item.title, item.imageUrl]);
+            }
+            break;
+        } catch (error) {
+            console.log(error);
+            retries -= 1;
+            console.log(`retries left ${retries}`);
+            await new Promise(res => setTimeout(res, 5000));
+        }
     }
 
     await client.end();
+    console.log('client disconnected');
 }
 
 (async () => {

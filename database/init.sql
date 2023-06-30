@@ -1,4 +1,4 @@
-CREATE DATABASE propertydb;
+SELECT 'CREATE DATABASE propertydb' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'propertydb')\gexec
 
 \c propertydb;
 

@@ -2,8 +2,10 @@ SELECT 'CREATE DATABASE propertydb' WHERE NOT EXISTS (SELECT FROM pg_database WH
 
 \c propertydb;
 
-CREATE TABLE public."properties" (
+CREATE TABLE IF NOT EXISTS public."properties" (
     "propertyId" SERIAL PRIMARY KEY,
     "title" TEXT,
     "imageUrl" TEXT
 );
+
+

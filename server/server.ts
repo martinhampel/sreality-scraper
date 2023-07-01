@@ -9,7 +9,7 @@ const port = 3003;
 app.use(cors());
 
 const client = new Client({
-    host: 'localhost',
+    host: 'db',
     user: DB_USERNAME,
     password: DB_PASSWORD,
     database: 'propertydb'
@@ -26,6 +26,10 @@ async function connectToDatabase() {
 }
 
 connectToDatabase();
+
+app.get('/ping', (req: Request, res: Response) => {
+    res.status(200).json({ success: true, message: 'Server is running' });
+});
 
 app.get('/values/all', async (req: Request, res: Response) => {
     try {
